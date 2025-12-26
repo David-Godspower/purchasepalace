@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerStore | Online Shopping for Fashion, Electronics, Food, Furniture and More</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="img/logo.jpg">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="img/pslg.png" alt="PowerShops Logo"></a>
+        <div class="search-bar">
+            <input type="text" placeholder="Search brands, products and more...">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Search</title><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+            <button><p>Search</p></button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Home</title><path d="M19.07,4.93C17.22,3 14.66,1.96 12,2C9.34,1.96 6.79,3 4.94,4.93C3,6.78 1.96,9.34 2,12C1.96,14.66 3,17.21 4.93,19.06C6.78,21 9.34,22.04 12,22C14.66,22.04 17.21,21 19.06,19.07C21,17.22 22.04,14.66 22,12C22.04,9.34 21,6.78 19.07,4.93M17,12V18H13.5V13H10.5V18H7V12H5L12,5L19.5,12H17Z" /></svg>Home</a> </li>
+                <div id="auth-section">
+                    <ul><!-- Authentication links will be dynamically inserted here -->
+                        <li><a href="signin.html" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Account</title><path d="M12,19.2C9.5,19.2 7.29,17.92 6,16C6.03,14 10,12.9 12,12.9C14,12.9 17.97,14 18,16C16.71,17.92 14.5,19.2 12,19.2M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" /></svg>Sign in</a></li>
+                        <li><a href="signin.html#createAccountLink" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Account</title><path d="M12,19.2C9.5,19.2 7.29,17.92 6,16C6.03,14 10,12.9 12,12.9C14,12.9 17.97,14 18,16C16.71,17.92 14.5,19.2 12,19.2M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" /></svg>Sign Up</a></li>
+                        <li><a href="signin.html#forgotPasswordLink" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Account</title><path d="M12,19.2C9.5,19.2 7.29,17.92 6,16C6.03,14 10,12.9 12,12.9C14,12.9 17.97,14 18,16C16.71,17.92 14.5,19.2 12,19.2M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" /></svg>Forgot Password</a></li>
+                    </ul>
+                </div>
+                <div id="user-section" style="display: none;"></div>
+                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>My Cart</title><path d="M17,18A2,2 0 0,1 19,20A2,2 0 0,1 17,22C15.89,22 15,21.1 15,20C15,18.89 15.89,18 17,18M1,2H4.27L5.21,4H20A1,1 0 0,1 21,5C21,5.17 20.95,5.34 20.88,5.5L17.3,11.97C16.96,12.58 16.3,13 15.55,13H8.1L7.2,14.63L7.17,14.75A0.25,0.25 0 0,0 7.42,15H19V17H7C5.89,17 5,16.1 5,15C5,14.65 5.09,14.32 5.24,14.04L6.6,11.59L3,4H1V2M7,18A2,2 0 0,1 9,20A2,2 0 0,1 7,22C5.89,22 5,21.1 5,20C5,18.89 5.89,18 7,18M16,11L18.78,6H6.14L8.5,11H16Z" /></svg>Cart</a></li>
+                <li> <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Help Center</title><path d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z" /></svg>Help</a> </li>
+                <li class="bell"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Notifications</title><path d="M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M14,21A2,2 0 0,1 12,23A2,2 0 0,1 10,21" /></svg></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <img src="img/bg.jpg" alt="Hero Image">
+            <h1>Shop Smart, Live Better</h1>
+            <div class="hero-content">
+                <h2>Welcome to PowerStore</h2>
+                <p>Your one-stop shop for all your needs!</p>
+                <a href="#shop-by-category" class="shop-now-btn">Shop Now</a>
+
+            </div>
+        </section>
+      
+        <section class="shop-by-category" id="shop-by-category">
+            <h2>Shop by Category</h2>
+            <div class="categories">
+                 <div class="category">
+                    <a href="products.html"><img src="img/food.jpg" alt="Food">
+                    <h3>Food</h3></a>
+                </div>
+                 <div class="category">
+                    <a href="#beverages"><img src="img/beverages.jpg" alt="Beverages">
+                    <h3>Beverages</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#groceries"><img src="img/groceries.jpg" alt="Groceries">
+                    <h3>Groceries</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#fashion"><img src="img/fashion.jpg" alt="Fashion">
+                    <h3>Fashion and Apparel</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#makeup"><img src="img/makeup.jpg" alt="Makeup">
+                    <h3>Makeup</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#beauty"><img src="img/beauty-health.jpg" alt="Beauty">
+                    <h3>Beauty and Health</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#shoes"><img src="img/shoes.jpg" alt="Shoes">
+                    <h3>Shoes</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#home-appliances"><img src="img/home_appliances.jpg" alt="Home Appliances">
+                    <h3>Home Appliances</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#electronics"><img src="img/electronics.jpg" alt="Electronics">
+                    <h3>Electronics</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#computing"><img src="img/computing.jpg" alt="Computing">
+                    <h3>Computing</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#mobiles"><img src="img/mobiles.jpg" alt="Mobiles">
+                    <h3>Mobiles</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#media"><img src="img/media.jpg" alt="Media">
+                    <h3>Media</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#office-equipment"><img src="img/office-equipment.jpg" alt="Office Equipment">
+                    <h3>Office Equipment</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#tools"><img src="img/tools.jpg" alt="Tools">
+                    <h3>Tools and Industrials</h3></a>
+                </div>
+                 <div class="category">
+                    <a href="#furniture"><img src="img/furniture.jpg" alt="Furniture">
+                    <h3>Furniture</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#automotive"><img src="img/automotive.jpg" alt="Automotive">
+                    <h3>Automotive</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#diy"><img src="img/diy.jpg" alt="DIY and Hardware">
+                    <h3>DIY and Hardware</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#books"><img src="img/books.jpg" alt="Books">
+                    <h3>Books</h3></a>
+                </div>
+                
+                <div class="category">
+                    <a href="#sports"><img src="img/sports.jpg" alt="Sports">
+                    <h3>Sports and Outdoors</h3></a>
+                </div>
+               
+                 <div class="category">
+                    <a href="#baby-products"><img src="img/baby_products.jpg" alt="Baby Products">
+                    <h3>Baby Products</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#toys"><img src="img/toys.jpg" alt="Toys">
+                    <h3>Toys and Hobbies</h3></a>
+                </div>
+                <div class="category">
+                    <a href="#pets"><img src="img/pets.jpg" alt="Pets">
+                    <h3>Pet Supplies</h3></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="new-arrivals" id="new-arrivals">
+            <div class="arrivals">
+                <h2>New Arrivals</h2>
+                <a href="#shop-by-category" class="view-all-btn">View All<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>View All New Arrivals</title><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg></a>
+            </div>
+             <p class="arrivals-p">Check out the latest additions to our store!</p>
+            <div class="product-grid">
+                <div class="product-card">
+                    <a href="#"><img src="img/laptop_product_feature.jpg" alt="Dell Latitude 5580"></a>
+                    <h3>Dell Latitude 5580</h3>
+                    <span class="label">New</span>
+                    <p class="price">$109.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1597415581463-4b7a5a87be62?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjJ8fG1vYmlsZSUyMHBob25lfGVufDB8MHwwfHx8MA%3D%3D" alt="Tecno Pop 10pro">
+                    <h3>Tecno Pop 10pro</h3>
+                    <span class="label">New</span>
+                    <p class="price">$86.52</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=1180&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Casio Vent">
+                    <h3>Casio Vent</h3>
+                    <span class="label">New</span>
+                    <p class="price">$50.67</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1465453869711-7e174808ace9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c25lYWtlcnN8ZW58MHwwfDB8fHww" alt="Nike Air Max 270">
+                    <h3>Nike Air Max 270</h3>
+                    <span class="label">New</span>
+                    <p class="price">$60.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dG95c3xlbnwwfDB8MHx8fDI%3D" alt="Baby Toys">
+                    <h3>Baby Toys</h3>
+                    <span class="label">New</span>
+                    <p class="price">$50.21</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1593340010859-83edd3d6d13f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGJvb2t8ZW58MHwwfDB8fHwy" alt="Thinking Fast and Slow">
+                    <h3>Thinking Fast and Slow</h3>
+                    <span class="label">New</span>
+                    <p class="price">$5.59</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2FwfGVufDB8MHwwfHx8Mg%3D%3D" alt="Baseball Cap">
+                    <h3>Baseball Cap</h3>
+                    <span class="label">New</span>
+                    <p class="price">$4.92</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmFsbHxlbnwwfDB8MHx8fDI%3D" alt="Nike Ball">
+                    <h3>Nike Ball</h3>
+                    <span class="label">New</span>
+                    <p class="price">$10.15</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyZnVtZXxlbnwwfDB8MHx8fDI%3D" alt=" Bleu de Chanel perfume">
+                    <h3> Bleu de Chanel perfume</h3>
+                    <span class="label">New</span>
+                    <p class="price">$125.49</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1628582357531-3da2e5a05875?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fHdhdGVyJTIwYm90dGxlfGVufDB8MHwwfHx8Mg%3D%3D" alt="Stainless Water Bottle">
+                    <h3>Stainless Water Bottle</h3>
+                    <span class="label">New</span>
+                    <p class="price">$36.74</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1651761179569-4ba2aa054997?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tee-Shirt">
+                    <h3>Tee-Shirt</h3>
+                    <span class="label">New</span>
+                    <p class="price">$9.65</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZnVybml0dXJlfGVufDB8MHwwfHx8MA%3D%3D" alt="Two-Seater Sofa">
+                    <h3>Two-Seater Sofa</h3>
+                    <span class="label">New</span>
+                    <p class="price">$1789.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!--Most Popular-->
+         <section class="most-popular" id="most-popular">
+            <div class="popular">
+                <h2>Most Popular</h2>
+                <a href="#shop-by-category" class="view-all-btn">View All<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>View All New Arrivals</title><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg></a>
+            </div>
+             <p class="popular-p">Check out our customers’ favorite picks this week!</p>
+            <div class="product-grid">
+                <div class="product-cardd">
+                    <a href="#"><img src="https://images.unsplash.com/photo-1542590943-168e4c89eeb5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTU2fHxwaWFub3xlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500" alt="Stehling Keyboard"></a>
+                    <h3>Stehling Keyboard</h3>
+                    <span class="label">Hot</span>
+                    <p class="price">2323.52</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-cardd">
+                    <img src="https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hhaXJ8ZW58MHwwfDB8fHww&auto=format&fit=crop&q=60&w=500" alt="Office Chair">
+                    <h3>Office Chair</h3>
+                    <span class="label">Top Rated</span>
+                    <p class="price">$46.52</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-cardd">
+                    <img src="https://images.unsplash.com/photo-1692198552910-ccaa39a6aba4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2Fsa2llJTIwdGFsa2llfGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=500" alt="Baofeng Walkie Talkie">
+                    <h3>Baofeng Walkie Talkie</h3>
+                    <span class="label">Trending</span>
+                    <p class="price">$10.67</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-cardd">
+                    <img src="https://images.unsplash.com/photo-1623126908029-58cb08a2b272?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8dGFibGV0fGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=500" alt="Samsung Galaxy Tab S10 FE">
+                    <h3>Samsung Galaxy Tab S10 FE</h3>
+                    <span class="label">Most Popular</span>
+                    <p class="price">$200.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-cardd">
+                    <img src="https://images.unsplash.com/photo-1521607630287-ee2e81ad3ced?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGxlZCUyMHR2fGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=500" alt="Smart Tv">
+                    <h3>Smart Tv</h3>
+                    <span class="label">Top Rated</span>
+                    <p class="price">$50.21</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-cardd">
+                    <img src="https://images.unsplash.com/photo-1584809394311-364392a5011b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dmVoaWNsZXxlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500" alt="BMW">
+                    <h3>BMW M3</h3>
+                    <span class="label">TOP RATED</span>
+                    <p class="price">$168, 500</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-cardd">
+                    <img src="https://images.unsplash.com/photo-1681117338192-8c80863355e1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzE1fHxiaWJsZXxlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500" alt="Holy Bible">
+                    <h3>Holy Bible KJV</h3>
+                    <span class="label">Most Popular</span>
+                    <p class="price">$4.92</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product-cardd">
+                    <img src="https://images.unsplash.com/photo-1656057497463-37e68d6ff329?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGNjdHYlMjBjYW1lcmF8ZW58MHwwfDB8fHww&auto=format&fit=crop&q=60&w=500" alt="CCTV Camera">
+                    <h3>CCTV Camera</h3>
+                    <span class="label">HOT</span>
+                    <p class="price">$59.65</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="footer-top">
+                <p class="p">&copy; <span id="year"></span> PowerStore. All rights reserved.</p>
+                <form class="newsletter-form">
+                    <label for="email">Subscribe to our newsletter:</label>
+                    <input type="email" id ="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit" id="subscribe-btn">Subscribe</button>
+                    <input type="checkbox" id="checkbox" name="checkbox" required><label for="checkbox">I agree to PowerStore’s Privacy and Cookie Policy. You can unsubscribe from newsletters at any time.</label>
+                </form>
+            </div>
+            <div class="footer-content">
+                <div class="help">
+                    <h1>In Need of Help?</h1>
+                    <ul>
+                        <li><a href="#">Chat with Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Our Purchase Protection</a></li>
+                    </ul>
+                </div>
+                <div class="footer-about">
+                    <h1>About PowerStore</h1>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Blog</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Where you can find us</a></li>
+                         <li><a href="#">Policy</a></li>
+                        <li><a href="#">Terms and Conditions</a></li>
+                         <li><a href="#">PickUp Stations</a></li>
+                        <li><a href="#">Flash Sales</a></li>
+                        <li><a href="#">Monthly Jumbo</a></li>
+                         <li><a href="#">Anniversary Promo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-connect">
+                    <h1>Connect With Us</h1>
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/david-ajala-a93b862a1/" target="_blank"><i class="fab fa-linkedin icons" id="linkedin"></i></a></li>
+                        <li><a href="https://web.facebook.com/facebook.comDavidGodpowerAjalaDGA/" target="_blank"><i class="fab fa-facebook icons" id="facebook"></i></a></li>
+                        <li><a href="https://x.com/ajala28981" target="_blank"><i class="fab fa-x icons" id="x"></i></a></li>
+                        <li><a href="mailto:ajaladavid11@gmail.com" target="_blank"><i class="fas fa-envelope icons" id="gmail"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/david-ajala-a93b862a1/" target="_blank"><i class="fab fa-youtube icons" id="youtube"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/david-ajala-a93b862a1/" target="_blank"><i class="fab fa-instagram icons" id="instagram"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/david-ajala-a93b862a1/" target="_blank"><i class="fab fa-tiktok icons" id="tiktok"></i></a></li>
+                    </ul>
+                </div><br>
+                <div class="footer-payment">
+                    <h1>We Accept</h1>
+                    <ul>
+                        <li><i class="fab fa-cc-visa payment-icons" id="visa"></i></li>
+                        <li><i class="fab fa-cc-mastercard payment-icons" id="mastercard"></i></li>
+                        <li><i class="fab fa-cc-amex payment-icons" id="amex"></i></li>
+                        <li><i class="fab fa-cc-paypal payment-icons" id="paypal"></i></li>
+                        <li><i class="fab fa-cc-discover payment-icons" id="discover"></i></li>
+                        <li><i class="fab fa-cc-stripe payment-icons" id="stripe"></i></li>
+                        <li><i class="fab fa-cc-jcb payment-icons" id="jcb"></i></li>
+                        <li><i class="fab fa-cc-verve payment icons" id="verve"></i> </li>
+                    </ul>
+            </div>
+        </footer>
+
+         <button id="myBtn"><img src="img/image.png"> </button>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
