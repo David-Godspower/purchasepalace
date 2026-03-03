@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerStore | Checkout</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <header>
+        <a href="index.html"><img src="img/pslg.png" alt="PowerShops Logo"></a>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-arrow-left"></i> Continue Shopping</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="checkout-container">
+        <h1>Checkout</h1>
+        
+        <div class="checkout-layout">
+            <section class="checkout-form-section">
+                <form id="checkout-form">
+                    
+                    <h2><i class="fas fa-user-circle"></i> Contact Info</h2>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="name" placeholder="e.g. David Ajala" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="david@example.com" required>
+                    </div>
+
+                    <h2><i class="fas fa-truck"></i> Shipping Address</h2>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" id="address" placeholder="123 Tech Street, Lagos" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" id="city" placeholder="Ikeja" required>
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" id="state" placeholder="Lagos" required>
+                        </div>
+                    </div>
+
+                    <h2><i class="fas fa-credit-card"></i> Payment</h2>
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" placeholder="0000 0000 0000 0000" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Expiry</label>
+                            <input type="text" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" placeholder="123" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="place-order-btn">Pay Now & Place Order</button>
+                </form>
+            </section>
+
+            <section class="checkout-summary">
+                <h2>Order Summary</h2>
+                <div id="order-items-list"></div>
+                
+                <hr>
+                
+                <div class="summary-row total">
+                    <span>Total to Pay:</span>
+                    <span id="checkout-total">$0.00</span>
+                </div>
+            </section>
+        </div>
+    </main>
+
+     <footer>
+            <div class="footer-top">
+                <p class="p">&copy; <span id="year"></span> PowerStore. All rights reserved.</p>
+                <form class="newsletter-form">
+                    <label for="email">Subscribe to our newsletter:</label>
+                    <input type="email" id ="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit" id="subscribe-btn">Subscribe</button>
+                    <input type="checkbox" id="checkbox" name="checkbox" required><label for="checkbox">I agree to PowerStore’s Privacy and Cookie Policy. You can unsubscribe from newsletters at any time.</label>
+                </form>
+            </div>
+            <div class="footer-content">
+                <div class="help">
+                    <h1>In Need of Help?</h1>
+                    <ul>
+                        <li><a href="#">Chat with Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Our Purchase Protection</a></li>
+                    </ul>
+                </div>
+                <div class="footer-about">
+                    <h1>About PowerStore</h1>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Blog</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Where you can find us</a></li>
+                         <li><a href="#">Policy</a></li>
+                        <li><a href="#">Terms and Conditions</a></li>
+                         <li><a href="#">PickUp Stations</a></li>
+                        <li><a href="#">Flash Sales</a></li>
+                        <li><a href="#">Monthly Jumbo</a></li>
+                         <li><a href="#">Anniversary Promo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-connect">
+                    <h1>Connect With Us</h1>
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/david-godspower-ajala/" target="_blank"><i class="fab fa-linkedin icons" id="linkedin"></i></a></li>
+                        <li><a href="https://web.facebook.com/facebook.comDavidGodpowerAjalaDGA/" target="_blank"><i class="fab fa-facebook icons" id="facebook"></i></a></li>
+                        <li><a href="https://x.com/ajala28981" target="_blank"><i class="fab fa-x icons" id="x"></i></a></li>
+                        <li><a href="mailto:ajaladavid11@gmail.com" target="_blank"><i class="fas fa-envelope icons" id="gmail"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/david-godspower-ajala/" target="_blank"><i class="fab fa-youtube icons" id="youtube"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/david-godspower-ajala/" target="_blank"><i class="fab fa-instagram icons" id="instagram"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/david-godspower-ajala/" target="_blank"><i class="fab fa-tiktok icons" id="tiktok"></i></a></li>
+                    </ul>
+                </div><br>
+                <div class="footer-payment">
+                    <h1>We Accept</h1>
+                    <ul>
+                        <li><i class="fab fa-cc-visa payment-icons" id="visa"></i></li>
+                        <li><i class="fab fa-cc-mastercard payment-icons" id="mastercard"></i></li>
+                        <li><i class="fab fa-cc-amex payment-icons" id="amex"></i></li>
+                        <li><i class="fab fa-cc-paypal payment-icons" id="paypal"></i></li>
+                        <li><i class="fab fa-cc-discover payment-icons" id="discover"></i></li>
+                        <li><i class="fab fa-cc-stripe payment-icons" id="stripe"></i></li>
+                        <li><i class="fab fa-cc-jcb payment-icons" id="jcb"></i></li>
+                        <li><i class="fab fa-cc-verve payment icons" id="verve"></i> </li>
+                    </ul>
+            </div>
+        </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/checkout.js"></script> </body>
+</html>
