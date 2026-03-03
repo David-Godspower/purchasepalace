@@ -204,3 +204,27 @@ function startHeroSlider() {
 
 // Start the slider when the page loads
 document.addEventListener('DOMContentLoaded', startHeroSlider);
+
+
+// ==========================================
+// 📱 MOBILE MENU TOGGLE
+// ==========================================
+const hamburger = document.getElementById('hamburger-btn');
+const navLinks = document.getElementById('nav-links');
+
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+        // Toggle the 'active' class on the list
+        navLinks.classList.toggle('active');
+        
+        // Optional: Toggle the icon from Bars to X
+        const icon = hamburger.querySelector('i');
+        if (navLinks.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+}

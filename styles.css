@@ -568,51 +568,63 @@ footer {
         grid-template-columns: repeat(2, 1fr); 
     }
 }
+/* =========================================
+   HAMBURGER MENU STYLES
+   ========================================= */
 
+/* Default: Hide Hamburger on Desktop */
+.hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+}
+
+/* MOBILE SCREEN STYLES (Phones & Tablets) */
 @media (max-width: 768px) {
-    /* MOBILE PHONES */
-    header {
-        padding: 15px 15px;
-    }
-    nav ul {
-        gap: 15px; /* Squeeze icons closer together */
-    }
     
-    /* 🔥 MAGIC TRICK: Hide Nav text, keep only icons! */
-    nav ul li a {
-        font-size: 0; /* Makes the text invisible */
-        gap: 0;
-    }
-    nav a svg {
-        width: 28px; /* Make icons slightly bigger since text is gone */
-        height: 28px;
-    }
-    .cart-badge {
-        top: -6px;
-        left: 18px; /* Adjust badge position for bigger icon */
+    /* 1. Show the Hamburger */
+    .hamburger {
+        display: block;
+        z-index: 2000; /* Sit on top of everything */
     }
 
-    /* Smaller Hero text */
-    .hero {
-        height: 400px;
+    /* 2. The Side Drawer (Hidden by default) */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hide off-screen to the right */
+        height: 100vh; /* Full Height */
+        width: 70%;    /* Cover 70% of screen */
+        background-color: #001f3f; /* Dark Blue background */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* Center items vertically */
+        gap: 40px;
+        transition: right 0.4s ease-in-out; /* Smooth Slide */
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+        z-index: 1500;
     }
-    .hero h1 {
-        font-size: 32px;
+
+    /* 3. The "Active" State (Slide In) */
+    .nav-links.active {
+        right: 0; /* Bring it onto the screen */
     }
-    .hero-content h2 {
-        font-size: 20px;
+
+    /* 4. Fix the Links inside the drawer */
+    .nav-links li a {
+        font-size: 20px !important; /* Make text big again */
+        color: white;
     }
-    .arrivals h2, .popular h2 {
-        font-size: 20px;
-    }
-    
-    /* Footer stacking */
-    .footer-content {
-        grid-template-columns: 1fr; 
-        text-align: center;
-    }
-    .footer-connect ul {
-        justify-content: center;
+
+    /* Hide the Search bar on very small screens if needed, 
+       or stack it nicely */
+    .search-bar {
+        order: 3;
+        width: 100%;
+        margin-top: 15px;
     }
 }
 
