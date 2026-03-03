@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerStore | Product Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <header>
+        <a href="index.html"><img src="img/pslg.png" alt="PowerShops Logo"></a>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li>
+                    <a href="cart.html">
+                        <i class="fas fa-shopping-cart"></i> Cart
+                        <span id="cart-badge" class="cart-badge">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="product-details-container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / <span id="breadcrumb-title">Loading...</span>
+        </div>
+
+        <div class="product-layout">
+            <div class="product-image-section">
+                <img id="product-img" src="" alt="Loading product...">
+            </div>
+
+            <div class="product-info-section">
+                <h1 id="product-title">Loading...</h1>
+                <p id="product-price" class="price">...</p>
+                <p id="product-desc" class="description">
+                    Loading description...
+                </p>
+                
+                <div class="action-buttons">
+                    <button id="add-to-cart-btn" class="add-to-cart-large">Add to Cart</button>
+                    <button class="buy-now-btn">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+            <div class="footer-top">
+                <p class="p">&copy; <span id="year"></span> PowerStore. All rights reserved.</p>
+                <form class="newsletter-form">
+                    <label for="email">Subscribe to our newsletter:</label>
+                    <input type="email" id ="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit" id="subscribe-btn">Subscribe</button>
+                    <input type="checkbox" id="checkbox" name="checkbox" required><label for="checkbox">I agree to PowerStore’s Privacy and Cookie Policy. You can unsubscribe from newsletters at any time.</label>
+                </form>
+            </div>
+            <div class="footer-content">
+                <div class="help">
+                    <h1>In Need of Help?</h1>
+                    <ul>
+                        <li><a href="#">Chat with Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Our Purchase Protection</a></li>
+                    </ul>
+                </div>
+                <div class="footer-about">
+                    <h1>About PowerStore</h1>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Blog</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Where you can find us</a></li>
+                         <li><a href="#">Policy</a></li>
+                        <li><a href="#">Terms and Conditions</a></li>
+                         <li><a href="#">PickUp Stations</a></li>
+                        <li><a href="#">Flash Sales</a></li>
+                        <li><a href="#">Monthly Jumbo</a></li>
+                         <li><a href="#">Anniversary Promo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-connect">
+                    <h1>Connect With Us</h1>
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/david-godspower-ajala/" target="_blank"><i class="fab fa-linkedin icons" id="linkedin"></i></a></li>
+                        <li><a href="https://web.facebook.com/facebook.comDavidGodpowerAjalaDGA/" target="_blank"><i class="fab fa-facebook icons" id="facebook"></i></a></li>
+                        <li><a href="https://x.com/ajala28981" target="_blank"><i class="fab fa-x icons" id="x"></i></a></li>
+                        <li><a href="mailto:ajaladavid11@gmail.com" target="_blank"><i class="fas fa-envelope icons" id="gmail"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/david-godspower-ajala/" target="_blank"><i class="fab fa-youtube icons" id="youtube"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/david-godspower-ajala/" target="_blank"><i class="fab fa-instagram icons" id="instagram"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/david-godspower-ajala/" target="_blank"><i class="fab fa-tiktok icons" id="tiktok"></i></a></li>
+                    </ul>
+                </div><br>
+                <div class="footer-payment">
+                    <h1>We Accept</h1>
+                    <ul>
+                        <li><i class="fab fa-cc-visa payment-icons" id="visa"></i></li>
+                        <li><i class="fab fa-cc-mastercard payment-icons" id="mastercard"></i></li>
+                        <li><i class="fab fa-cc-amex payment-icons" id="amex"></i></li>
+                        <li><i class="fab fa-cc-paypal payment-icons" id="paypal"></i></li>
+                        <li><i class="fab fa-cc-discover payment-icons" id="discover"></i></li>
+                        <li><i class="fab fa-cc-stripe payment-icons" id="stripe"></i></li>
+                        <li><i class="fab fa-cc-jcb payment-icons" id="jcb"></i></li>
+                        <li><i class="fab fa-cc-verve payment icons" id="verve"></i> </li>
+                    </ul>
+            </div>
+        </footer>
+
+    <script src="js/products.js"></script> <script src="js/main.js"></script>     <script src="js/product-details.js"></script>
+</body>
+</html>
