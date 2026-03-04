@@ -2,8 +2,6 @@
 // 🌐 PURCHASEPALACE MAIN SITE SCRIPT
 // ==========================================
 
-console.log("Main.js is running...");
-
 // 1. INITIALIZE CART
 let cart = [];
 try {
@@ -12,21 +10,17 @@ try {
   console.error("Error loading cart:", error);
   cart = [];
 }
-
 document.addEventListener("DOMContentLoaded", () => {
-  // --- 1. RENDER PRODUCTS (The New Logic) ---
-  // This fills the empty grids on index.html
-  renderProducts();
-
-  // --- 2. SET YEAR ---
-  const yearSpan = document.getElementById("year");
-  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-  // --- 3. CHECK AUTH ---
-  if (typeof checkAuthStatus === "function") checkAuthStatus();
-
-  // --- 4. UPDATE BADGE ---
-  updateCartBadge();
+    // 1. Initial Load Tasks
+    renderProducts();
+    updateCartBadge();
+    
+    // 2. Auth Check (This MUST be inside here)
+    checkAuthStatus();
+    
+    // 3. Misc
+    const yearSpan = document.getElementById("year");
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 });
 
 // ==========================================
@@ -70,35 +64,33 @@ function renderProducts() {
     }
   });
 }
-
 // ==========================================
-// 👤 AUTHENTICATION LOGIC
+// 👤 SECURE AUTHENTICATION UI LOGIC
 // ==========================================
 function checkAuthStatus() {
-  const authSection = document.getElementById("auth-section");
-  const userSection = document.getElementById("user-section");
-  if (!authSection || !userSection) return;
+    const guestView = document.getElementById("guest-view");
+    const userView = document.getElementById("user-view");
+    const currentUser = JSON.parse(localStorage.getItem("purchasepalace_user"));
 
-  const currentUser = JSON.parse(localStorage.getItem("purchasepalace_user"));
+    // If these elements don't exist, stop so we don't get an error
+    if (!guestView || !userView) return;
 
-  if (currentUser) {
-    authSection.style.display = "none";
-    userSection.style.display = "flex";
-    userSection.innerHTML = `
-            <li><a href="#" style="color: #C5A059; font-weight: bold;"><i class="fas fa-user"></i> ${currentUser.name}</a></li>
-            <li><a href="#" id="logout-btn" style="color: #ff4d4d;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-        `;
-    document.getElementById("logout-btn").addEventListener("click", (e) => {
-      e.preventDefault();
-      localStorage.removeItem("purchasepalace_user");
-      window.location.reload();
-    });
-  } else {
-    authSection.style.display = "block";
-    userSection.style.display = "none";
-  }
+    if (currentUser) {
+        // User IS logged in
+        guestView.style.display = "none";
+        userView.style.display = "block";
+        
+        // Safely update the name
+        const userBtn = userView.querySelector(".user-btn");
+        if (userBtn) {
+            userBtn.textContent = `Hi, ${currentUser.name} ▾`;
+        }
+    } else {
+        // User IS NOT logged in
+        guestView.style.display = "block";
+        userView.style.display = "none";
+    }
 }
-
 // ==========================================
 // 🔍 SEARCH LOGIC
 // ==========================================
@@ -238,3 +230,13 @@ if (hamburgerBtn && navLinks) {
     }
   });
 }
+
+
+// Keep this in main.js to handle the dynamically created logout button
+document.addEventListener("click", (e) => {
+    if (e.target && e.target.id === "logout-btn") {
+        e.preventDefault();
+        localStorage.removeItem("purchasepalace_user");
+        window.location.reload();
+    }
+});
