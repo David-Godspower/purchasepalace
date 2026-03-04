@@ -205,26 +205,25 @@ function startHeroSlider() {
 // Start the slider when the page loads
 document.addEventListener('DOMContentLoaded', startHeroSlider);
 
-
 // ==========================================
 // 📱 MOBILE MENU TOGGLE
 // ==========================================
-const hamburger = document.getElementById('hamburger-btn');
+const hamburgerBtn = document.getElementById('hamburger-btn');
 const navLinks = document.getElementById('nav-links');
 
-if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-        // Toggle the 'active' class on the list
+if (hamburgerBtn && navLinks) {
+    hamburgerBtn.addEventListener('click', () => {
+        // 1. Toggle the 'active' class (Slides the menu in/out)
         navLinks.classList.toggle('active');
         
-        // Optional: Toggle the icon from Bars to X
-        const icon = hamburger.querySelector('i');
+        // 2. Change the Icon (Bars <-> X)
+        const icon = hamburgerBtn.querySelector('i');
         if (navLinks.classList.contains('active')) {
             icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
+            icon.classList.add('fa-times'); // Turn into an X
         } else {
             icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+            icon.classList.add('fa-bars'); // Turn back to Bars
         }
     });
 }
