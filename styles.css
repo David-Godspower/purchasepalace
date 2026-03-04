@@ -350,6 +350,29 @@ nav a:hover svg {
   box-shadow: 0 10px 20px rgba(255, 77, 77, 0.6);
 }
 
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 5; /* Sit on top of the images */
+}
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Add transform */
+}
+
+.dot:hover {
+    background-color: white; /* Highlight on hover */
+    transform: scale(1.2); /* Grow slightly on hover */
+}
+
 /* 4. THE MAGIC ANIMATION (Fade In Up) */
 @keyframes fadeInUp {
   from {
