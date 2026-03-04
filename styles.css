@@ -126,6 +126,112 @@ nav a:hover svg {
   fill: #c5a059;
 }
 
+/* Container for the user section */
+.user-menu-container {
+  position: relative; /* This makes the dropdown 'look' at this container */
+  display: inline-block;
+}
+
+/* The hidden content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+/* Container to hold the button and the dropdown */
+.user-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* The button styling */
+.user-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+}
+
+/* The dropdown box */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+#sign-in-alt {
+  background-color: #007bff;
+  color: white !important;
+  text-align: center;
+  font-size: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+#sign-in-alt:hover {
+  background-color: #003d80 !important;
+  color: white !important;
+}
+/* Show the dropdown on hover */
+.user-menu-container:hover .dropdown-content {
+  display: block;
+}
+/* Ensure icons in both dropdowns align with text */
+.dropdown-content a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  color: #333 !important;
+}
+
+.dropdown-content a i {
+  width: 20px; /* Forces all icons to take the same width for perfect vertical alignment */
+  text-align: center;
+}
+
+.dropdown-content a:hover {
+  background-color: blue;
+  color: white !important;
+}
+#logout-btn:hover {
+  background-color: red;
+  color: white !important; /* Keep the red on hover */
+}
+
+/* Set a standard size for your dropdown SVGs */
+.dropdown-content a svg {
+  width: 20px;
+  height: 20px;
+  fill: #555; /* Neutral grey color for icons */
+}
+
+/* Optional: Make the icon change color when hovering */
+.dropdown-content a:hover svg {
+  fill: #007bff; /* Matches your brand color */
+}
+#logout-btn {
+  text-align: center;
+  color: #ff4d4d !important; /* Red for Logout */
+  font-weight: bold !important;
+}
 /* =========================================
    CART BADGE
    ========================================= */
