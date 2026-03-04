@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. Initial Load Tasks
     renderProducts();
     updateCartBadge();
+    startHeroSlider();
     
     // 2. Auth Check (This MUST be inside here)
     checkAuthStatus();
@@ -185,28 +186,62 @@ function updateCartBadge() {
 // 🎞️ HERO SLIDER LOGIC
 // ==========================================
 function startHeroSlider() {
-  const slides = document.querySelectorAll(".slide");
-  let currentSlide = 0;
-  const slideInterval = 5000; // Switch every 5 seconds
+    const slides = document.querySelectorAll(".slide");
+    const dotsContainer = document.getElementById("slider-dots");
+    let currentSlide = 0;
+    const slideInterval = 5000;
 
-  // Only run if slides exist
-  if (slides.length === 0) return;
+    if (slides.length === 0 || !dotsContainer) return;
 
-  setInterval(() => {
-    // 1. Remove 'active' from current slide
-    slides[currentSlide].classList.remove("active");
+    // 1. Clear dots container first (prevents duplicates)
+    dotsContainer.innerHTML = ""; 
 
-    // 2. Calculate the next slide number
-    // (0 -> 1 -> 2 -> back to 0)
-    currentSlide = (currentSlide + 1) % slides.length;
+    // 2. Create dots for EVERY slide found
+    slides.forEach((_, index) => {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        if (index === 0) dot.classList.add("active");
+        
+        // Add click listener
+        dot.addEventListener("click", () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
 
-    // 3. Add 'active' to the new slide
-    slides[currentSlide].classList.add("active");
-  }, slideInterval);
+    // 2. Navigation function
+    function goToSlide(index) {
+        slides[currentSlide].classList.remove("active");
+        document.querySelectorAll(".dot")[currentSlide].classList.remove("active");
+        
+        currentSlide = index;
+        
+        slides[currentSlide].classList.add("active");
+        document.querySelectorAll(".dot")[currentSlide].classList.add("active");
+    }
+
+   // 3. Auto-play
+let slideTimer = setInterval(nextSlide, slideInterval);
+
+function nextSlide() {
+    let nextIndex = (currentSlide + 1) % slides.length;
+    goToSlide(nextIndex);
 }
 
-// Start the slider when the page loads
-document.addEventListener("DOMContentLoaded", startHeroSlider);
+// Update goToSlide to reset the timer
+function goToSlide(index) {
+    // Stop the current timer
+    clearInterval(slideTimer);
+    
+    // Perform the switch
+    slides[currentSlide].classList.remove("active");
+    document.querySelectorAll(".dot")[currentSlide].classList.remove("active");
+    currentSlide = index;
+    slides[currentSlide].classList.add("active");
+    document.querySelectorAll(".dot")[currentSlide].classList.add("active");
+    
+    // Restart the timer so it doesn't jump immediately after a click
+    slideTimer = setInterval(nextSlide, slideInterval);
+}
+}
 
 // ==========================================
 // 📱 MOBILE MENU TOGGLE
