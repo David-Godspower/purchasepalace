@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <script>
+  const user = localStorage.getItem("purchasepalace_user");
+  if (!user) {
+    alert("Please sign in to complete your purchase!");
+    // We add the redirect parameter here
+    window.location.href = "signin.html?redirect=checkout.html";
+  }
+</script>
     
     <header>
         <a href="index.html"><img src="img/pplogo.png" alt="PurchasePalace Logo"></a>
