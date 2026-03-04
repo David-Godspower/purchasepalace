@@ -85,7 +85,7 @@ function checkAuthStatus() {
     authSection.style.display = "none";
     userSection.style.display = "flex";
     userSection.innerHTML = `
-            <li><a href="#" style="color: #FACC15; font-weight: bold;"><i class="fas fa-user"></i> ${currentUser.name}</a></li>
+            <li><a href="#" style="color: #C5A059; font-weight: bold;"><i class="fas fa-user"></i> ${currentUser.name}</a></li>
             <li><a href="#" id="logout-btn" style="color: #ff4d4d;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         `;
     document.getElementById("logout-btn").addEventListener("click", (e) => {
