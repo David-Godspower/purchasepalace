@@ -1,19 +1,19 @@
 // current year in footer
-document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById("year").textContent = new Date().getFullYear();
 
 // Scroll-to-top button
-  // ----------------------
-  const goUpBtn = document.getElementById("myBtn");
-  window.addEventListener("scroll", () => {
-    goUpBtn.style.display = window.scrollY > 20 ? "block" : "none";
-  });
-  goUpBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+// ----------------------
+const goUpBtn = document.getElementById("myBtn");
+window.addEventListener("scroll", () => {
+  goUpBtn.style.display = window.scrollY > 20 ? "block" : "none";
+});
+goUpBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Check if a user is saved in localStorage
-  const storedUser = localStorage.getItem("powerstoreUser");
+  const storedUser = localStorage.getItem("purchasepalaceUser");
 
   const authSection = document.getElementById("auth-section");
   const userSection = document.getElementById("user-section");
@@ -49,11 +49,10 @@ document.addEventListener("DOMContentLoaded", function() {
     `;
 
     // Handle logout
-    document.getElementById("logoutBtn").addEventListener("click", function() {
-      localStorage.removeItem("powerstoreUser");
+    document.getElementById("logoutBtn").addEventListener("click", function () {
+      localStorage.removeItem("purchasepalaceUser");
       location.reload();
     });
-
   } else {
     // No user found — show Sign In/Register links
     authSection.style.display = "flex";
