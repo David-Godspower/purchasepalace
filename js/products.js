@@ -205,4 +205,51 @@ const products = [
     badge: "HOT",
     section: "popular",
   },
+
+
+  {
+    id: 21,
+    name: "Organic Basmati Rice",
+    price: 15.99,
+    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500",
+    category: "food",
+    badge: "Organic",
+    section: "arrivals",
+  },
+  {
+    id: 22,
+    name: "Premium Roasted Coffee",
+    price: 12.50,
+    image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500",
+    category: "beverages",
+    badge: "Best Seller",
+    section: "popular",
+  },
+  {
+    id: 23,
+    name: "Matte Liquid Lipstick",
+    price: 22.00,
+    image: "https://images.unsplash.com/photo-1586776977607-310e9c725c37?w=500",
+    category: "makeup",
+    badge: "Trending",
+    section: "arrivals",
+  },
+  {
+    id: 24,
+    name: "Electric Fruit Juicer",
+    price: 45.99,
+    image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=500",
+    category: "home-appliances",
+    badge: "New",
+    section: "arrivals",
+  },
+  {
+    id: 25,
+    name: "Adjustable Dumbbell Set",
+    price: 89.99,
+    image: "https://images.unsplash.com/photo-1638536532686-d610adfc8e5c?w=500",
+    category: "sports",
+    badge: "Heavy Duty",
+    section: "popular",
+  }
 ];
