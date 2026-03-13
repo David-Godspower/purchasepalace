@@ -487,6 +487,53 @@
   setupToggle("signin-password", "toggle-signin-password-1");
   document.getElementById("year").textContent = new Date().getFullYear();
   document.querySelector(".sign-in").addEventListener("submit", validateInput);
+
+
+
+
+  // ==========================================
+// 🌐 SOCIAL LOGIN SIMULATION
+// ==========================================
+function handleSocialLogin(platform) {
+    const message = document.querySelector(
+        document.querySelector(".sign-in").style.display === "none" 
+        ? "#validationMessageSignup" 
+        : "#validationMessage"
+    );
+
+    message.textContent = `Connecting to ${platform}...`;
+    message.style.color = "orange";
+
+    setTimeout(() => {
+        // Save a "Social User" to LocalStorage
+        localStorage.setItem("purchasepalace_user", JSON.stringify({
+            name: `${platform} User`,
+            email: `user@${platform.toLowerCase()}.com`,
+            provider: platform
+        }));
+
+        const targetName = getTargetName();
+        message.textContent = `${platform} Login successful! Redirecting to ${targetName}...`;
+        message.style.color = "green";
+
+        setTimeout(onLoginSuccess, 1500);
+    }, 1500);
+}
+
+// Attach listeners to buttons
+document.querySelectorAll("#facebookbtn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        handleSocialLogin("Facebook");
+    });
+});
+
+document.querySelectorAll("#googlebtn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        handleSocialLogin("Google");
+    });
+});
 </script>
   </body>
 </html>
