@@ -3,51 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PurchasePalace | Product Details</title>
+    <title>PurchasePalace | Shop Category</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    
     <header>
         <a href="index.html"><img src="img/pplogo.png" alt="PurchasePalace Logo"></a>
         <nav>
             <ul>
                 <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                <li>
-                    <a href="cart.html">
-                        <i class="fas fa-shopping-cart"></i> Cart
-                        <span id="cart-badge" class="cart-badge">0</span>
-                    </a>
-                </li>
+                <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-badge" class="cart-badge">0</span></a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="product-details-container">
+    <main class="category-container">
+        <h1 id="category-title" style="text-align:center; padding: 20px;">Category</h1>
+        <div id="category-grid" class="product-grid"></div>
+
         <div class="breadcrumb">
-            <a href="index.html">Home</a> / <span id="breadcrumb-title">Loading...</span>
-        </div>
-
-        <div class="product-layout">
-            <div class="product-image-section">
-                <img id="product-img" src="" alt="Loading product...">
-            </div>
-
-            <div class="product-info-section">
-                <h1 id="product-title">Loading...</h1>
-                <p id="product-price" class="price">...</p>
-                <p id="product-desc" class="description">
-                    Loading description...
-                </p>
-                
-                <div class="action-buttons">
-                    <button id="add-to-cart-btn" class="add-to-cart-large">Add to Cart</button>
-                    <button class="buy-now-btn">Buy Now</button>
-                </div>
-            </div>
-        </div>
+    <a href="index.html">Home</a> / <span id="breadcrumb-title">Loading...</span>
+    <button onclick="history.back()" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Results
+    </button>
+</div>
     </main>
 
     <footer>
@@ -107,11 +87,16 @@
                         <li><i class="fab fa-cc-discover payment-icons" id="discover"></i></li>
                         <li><i class="fab fa-cc-stripe payment-icons" id="stripe"></i></li>
                         <li><i class="fab fa-cc-jcb payment-icons" id="jcb"></i></li>
-                        <li><i class="fab fa-cc-verve payment icons" id="verve"></i> </li>
+                        <li><i class="fab fa-cc-verve payment-icons" id="verve"></i> </li>
                     </ul>
             </div>
         </footer>
 
-    <script src="js/products.js"></script> <script src="js/main.js"></script>     <script src="js/product-details.js"></script>
+        <button id="myBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+</button>
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/category-manager.js"></script>
 </body>
 </html>
