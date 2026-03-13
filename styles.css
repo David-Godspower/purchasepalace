@@ -576,6 +576,32 @@ nav a:hover svg {
   /* REMOVED: Rotation effects. Keep e-commerce clean. */
 }
 
+
+.back-link {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* On mobile, maybe give it more space */
+@media (max-width: 768px) {
+    .back-link {
+        display: block;
+        margin: 10px 0;
+    }
+}
 /* =========================================
    FOOTER
    ========================================= */
@@ -687,7 +713,6 @@ footer {
    BACK TO TOP BUTTON
    ========================================= */
 #myBtn {
-  display: none;
   position: fixed;
   bottom: 30px;
   right: 30px;
@@ -700,10 +725,22 @@ footer {
   height: 50px;
   border-radius: 50%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s;
+  
+  /* Initial State: Hidden but ready */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
+
+/* This class will be added by JavaScript */
+#myBtn.show {
+  opacity: 1;
+  visibility: visible;
+}
+
 #myBtn:hover {
   background-color: #0056b3;
+  transform: translateY(-5px);
 }
 /* =========================================
    MOBILE RESPONSIVENESS
@@ -1135,4 +1172,87 @@ footer {
   .action-buttons {
     flex-direction: column; /* Stack buttons */
   }
+}
+
+
+
+
+.thank-you-container {
+    text-align: center;
+    padding: 100px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.success-icon {
+    font-size: 80px;
+    color: #28a745;
+    margin-bottom: 20px;
+    animation: scaleUp 0.5s ease-out;
+}
+
+.order-details-box {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px 0;
+    border: 1px dashed #ccc;
+}
+
+@keyframes scaleUp {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+
+#facebookbtn, #googlebtn {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the text and icon together */
+    padding: 12px; /* Uniform padding */
+    gap: 15px;
+}
+
+#facebook, #google {
+    margin-right: 0; /* Reset your manual margins */
+    font-size: 20px;
+}
+
+
+/* --- TOAST NOTIFICATIONS --- */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    background: white;
+    color: #333;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    border-left: 5px solid #28a745; /* Success Green */
+    animation: slideIn 0.4s ease forwards, fadeOut 0.4s ease 2.5s forwards;
+}
+
+.toast svg {
+    width: 20px;
+    height: 20px;
+    fill: #28a745;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(20px); }
 }
