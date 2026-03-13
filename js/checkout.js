@@ -60,14 +60,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // C. Wait 2 seconds (Fake Payment Delay)
       setTimeout(() => {
-        alert("Success! Your order has been placed. 🚀");
+    // 1. Clear the cart
+    localStorage.removeItem("purchasepalace_cart");
 
-        // D. CLEAR THE CART (Wipe the memory)
-        localStorage.removeItem("purchasepalace_cart");
-
-        // E. GO HOME
-        window.location.href = "index.html";
-      }, 2000);
+    // 2. Redirect to Thank You page instead of Index
+    window.location.href = "thankyou.html";
+}, 2000);
     });
   }
+});
+
+// --- PREVENT LETTERS IN CARD & CVV ---
+const cardInput = document.querySelector('input[placeholder="0000 0000 0000 0000"]');
+const cvvInput = document.querySelector('input[placeholder="123"]');
+
+[cardInput, cvvInput].forEach(input => {
+    if(input) {
+        input.addEventListener('input', (e) => {
+            // Replace any non-digit character with nothing
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    }
 });
