@@ -2,6 +2,43 @@
 // 🌐 PURCHASEPALACE MAIN SITE SCRIPT
 // ==========================================
 
+// 1. Move this to the VERY TOP of main.js
+const toastContainer = document.createElement('div');
+toastContainer.id = 'toast-container';
+document.body.appendChild(toastContainer);
+
+// 2. Define the function next
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    const successIcon = `<svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" /></svg>`;
+    toast.innerHTML = `${successIcon} <span>${message}</span>`;
+    
+    // Safety check: make sure container exists before appending
+    if (toastContainer) {
+        toastContainer.appendChild(toast);
+    }
+
+    setTimeout(() => { toast.remove(); }, 3000);
+}
+const mybutton = document.getElementById("myBtn");
+
+window.addEventListener("scroll", () => {
+    // Show button after 300px of scrolling
+    if (window.pageYOffset > 300) {
+        mybutton.classList.add("show");
+    } else {
+        mybutton.classList.remove("show");
+    }
+});
+
+// Smooth scroll to top
+mybutton.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
 // 1. INITIALIZE CART
 let cart = [];
 try {
@@ -169,6 +206,8 @@ document.addEventListener("click", function (event) {
         event.target.style.color = "";
       }, 1000);
 
+
+      showToast("Item added to cart! 🛒");
       updateCartBadge();
     }
   }
@@ -242,30 +281,26 @@ function goToSlide(index) {
     slideTimer = setInterval(nextSlide, slideInterval);
 }
 }
-
-// ==========================================
-// 📱 MOBILE MENU TOGGLE
-// ==========================================
-const hamburgerBtn = document.getElementById("hamburger-btn");
+// --- FIXED MOBILE MENU TOGGLE ---
+const hamburger = document.getElementById("hamburger-btn");
 const navLinks = document.getElementById("nav-links");
 
-if (hamburgerBtn && navLinks) {
-  hamburgerBtn.addEventListener("click", () => {
-    // 1. Toggle the 'active' class (Slides the menu in/out)
-    navLinks.classList.toggle("active");
+if (hamburger && navLinks) {
+    hamburger.addEventListener("click", () => {
+        // Toggle the 'active' class on the menu
+        const isOpen = navLinks.classList.toggle("active");
+        
+        // Find the icon inside the button
+        const icon = hamburger.querySelector("i");
 
-    // 2. Change the Icon (Bars <-> X)
-    const icon = hamburgerBtn.querySelector("i");
-    if (navLinks.classList.contains("active")) {
-      icon.classList.remove("fa-bars");
-      icon.classList.add("fa-times"); // Turn into an X
-    } else {
-      icon.classList.remove("fa-times");
-      icon.classList.add("fa-bars"); // Turn back to Bars
-    }
-  });
+        // Set icon based on whether the menu is open or not
+        if (isOpen) {
+            icon.classList.replace("fa-bars", "fa-times");
+        } else {
+            icon.classList.replace("fa-times", "fa-bars");
+        }
+    });
 }
-
 
 // Keep this in main.js to handle the dynamically created logout button
 document.addEventListener("click", (e) => {
@@ -275,3 +310,22 @@ document.addEventListener("click", (e) => {
         window.location.reload();
     }
 });
+
+
+
+
+
+const newsletterForm = document.querySelector('.newsletter-form');
+
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Stop page reload
+        
+        const email = document.getElementById('email').value;
+        
+        if (email) {
+            showToast("Subscribed successfully! 📧");
+            newsletterForm.reset(); // Clear the input
+        }
+    });
+}
