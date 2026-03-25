@@ -18,17 +18,32 @@
         </nav>
     </header>
 
-    <main class="category-container">
-        <h1 id="category-title" style="text-align:center; padding: 20px;">Category</h1>
-        <div id="category-grid" class="product-grid"></div>
+    <main class="product-details-container">
+    <div class="breadcrumb" style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+        <a href="index.html">Home</a> / <span id="breadcrumb-category">Category</span> / <span id="breadcrumb-name">Product</span>
+    </div>
 
-        <div class="breadcrumb">
-    <a href="index.html">Home</a> / <span id="breadcrumb-title">Loading...</span>
-    <button onclick="history.back()" class="back-link">
-        <i class="fas fa-arrow-left"></i> Back to Results
-    </button>
-</div>
-    </main>
+    <div id="category-view" style="display: none; max-width: 1200px; margin: 0 auto; padding: 20px;">
+        <h1 id="category-title" style="text-align: center; margin-bottom: 20px;">Category Name</h1>
+        <div id="product-grid" class="product-grid"></div> 
+    </div>
+
+    <div id="single-product-view" class="product-layout" style="display: flex; gap: 50px; max-width: 1200px; margin: 0 auto; padding: 20px; flex-wrap: wrap;">
+        <div class="product-image-section" style="flex: 1; min-width: 300px;">
+            <img id="main-product-img" src="" alt="Product Image" style="width: 100%; border-radius: 10px;">
+        </div>
+        <div class="product-info-section" style="flex: 1; min-width: 300px;">
+            <h1 id="product-name">Loading Product...</h1>
+            <p id="product-badge"></p>
+            <p class="price" id="product-price">$0.00</p>
+            <p class="description">Experience premium quality with PurchasePalace.</p>
+            <div class="action-buttons">
+                <button id="add-to-cart-btn" class="add-to-cart-large">Add to Cart</button>
+                <button id="buy-now-btn" class="buy-now-btn">Buy Now</button>
+            </div>
+        </div>
+    </div>
+</main>
 
     <footer>
             <div class="footer-top">
@@ -95,8 +110,10 @@
         <button id="myBtn" title="Go to top">
     <i class="fas fa-arrow-up"></i>
 </button>
+
     <script src="js/products.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/category-manager.js"></script>
+   <script src="js/category-manager.js"></script>
+    <script src="js/product-details.js"></script>
 </body>
 </html>
