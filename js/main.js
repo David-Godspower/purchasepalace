@@ -1,331 +1,288 @@
 // ==========================================
-// 🌐 PURCHASEPALACE MAIN SITE SCRIPT
+// 🌍 GLOBAL STATE & SETTINGS
 // ==========================================
+let currentCurrency = localStorage.getItem("pp_currency") || "USD";
+const EXCHANGE_RATE = 1500; 
+let cart = JSON.parse(localStorage.getItem("purchasepalace_cart")) || [];
 
-// 1. Move this to the VERY TOP of main.js
-const toastContainer = document.createElement('div');
-toastContainer.id = 'toast-container';
+// --- 🍞 TOAST NOTIFICATION SYSTEM ---
+const toastContainer = document.createElement("div");
+toastContainer.id = "toast-container";
 document.body.appendChild(toastContainer);
 
-// 2. Define the function next
 function showToast(message) {
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    const successIcon = `<svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" /></svg>`;
-    toast.innerHTML = `${successIcon} <span>${message}</span>`;
-    
-    // Safety check: make sure container exists before appending
-    if (toastContainer) {
-        toastContainer.appendChild(toast);
-    }
-
-    setTimeout(() => { toast.remove(); }, 3000);
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    const icon = `<svg viewBox="0 0 24 24" width="20"><path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" /></svg>`;
+    toast.innerHTML = `${icon} <span>${message}</span>`;
+    toastContainer.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
 }
-const mybutton = document.getElementById("myBtn");
-
-window.addEventListener("scroll", () => {
-    // Show button after 300px of scrolling
-    if (window.pageYOffset > 300) {
-        mybutton.classList.add("show");
-    } else {
-        mybutton.classList.remove("show");
-    }
-});
-
-// Smooth scroll to top
-mybutton.addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-});
-// 1. INITIALIZE CART
-let cart = [];
-try {
-  cart = JSON.parse(localStorage.getItem("purchasepalace_cart")) || [];
-} catch (error) {
-  console.error("Error loading cart:", error);
-  cart = [];
-}
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. Initial Load Tasks
-    renderProducts();
-    updateCartBadge();
-    startHeroSlider();
-    
-    // 2. Auth Check (This MUST be inside here)
-    checkAuthStatus();
-    
-    // 3. Misc
-    const yearSpan = document.getElementById("year");
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-});
 
 // ==========================================
-// ⚙️ RENDER FUNCTION (Moved from products.js)
+// ⚙️ RENDER ENGINE (Badges, Prices, Stock)
 // ==========================================
-function renderProducts() {
-  // Safety: Do these grids exist?
-  const arrivalsGrid = document.getElementById("arrivals-grid");
-  const popularGrid = document.getElementById("popular-grid");
+function renderProducts(productsToDisplay = products) {
+    const arrivalsGrid = document.getElementById("arrivals-grid");
+    const popularGrid = document.getElementById("popular-grid");
+    const categoryGrid = document.getElementById("product-grid"); 
 
-  if (!arrivalsGrid && !popularGrid) return; // Stop if we are not on Home Page
+    if (arrivalsGrid) arrivalsGrid.innerHTML = "";
+    if (popularGrid) popularGrid.innerHTML = "";
+    if (categoryGrid) categoryGrid.innerHTML = ""; 
 
-  // Clear loading text
-  if (arrivalsGrid) arrivalsGrid.innerHTML = "";
-  if (popularGrid) popularGrid.innerHTML = "";
+    productsToDisplay.forEach((product) => {
+        // 1. Currency Math
+        const priceDisplay = currentCurrency === "USD" 
+            ? `$${product.price.toFixed(2)}` 
+            : `₦${(product.price * EXCHANGE_RATE).toLocaleString()}`;
+        const oldPriceDisplay = product.oldPrice ? (currentCurrency === "USD" 
+            ? `$${product.oldPrice.toFixed(2)}` 
+            : `₦${(product.oldPrice * EXCHANGE_RATE).toLocaleString()}`) : "";
 
-  // Loop through the data from products.js
-  products.forEach((product) => {
-    const formattedPrice = product.price.toLocaleString("en-US", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
-
-    // HERE IS THE FIX: href="product.html?id=${product.id}"
-    const productHTML = `
-            <div class="product-card">
-                <a href="product.html?id=${product.id}">
-                    <img src="${product.image}" alt="${product.name}">
-                </a>
-                <h3>${product.name}</h3>
-                <span class="label" style="padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">${product.badge}</span>
-                <p class="price">$${formattedPrice}</p>
-                <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
-            </div>
-        `;
-
-    if (product.section === "arrivals" && arrivalsGrid) {
-      arrivalsGrid.innerHTML += productHTML;
-    } else if (product.section === "popular" && popularGrid) {
-      popularGrid.innerHTML += productHTML;
-    }
-  });
-}
-// ==========================================
-// 👤 SECURE AUTHENTICATION UI LOGIC
-// ==========================================
-function checkAuthStatus() {
-    const guestView = document.getElementById("guest-view");
-    const userView = document.getElementById("user-view");
-    const currentUser = JSON.parse(localStorage.getItem("purchasepalace_user"));
-
-    // If these elements don't exist, stop so we don't get an error
-    if (!guestView || !userView) return;
-
-    if (currentUser) {
-        // User IS logged in
-        guestView.style.display = "none";
-        userView.style.display = "block";
-        
-        // Safely update the name
-        const userBtn = userView.querySelector(".user-btn");
-        if (userBtn) {
-            userBtn.textContent = `Hi, ${currentUser.name} ▾`;
+        // 2. Discount & Label Logic
+        let badgeHTML = "";
+        if (product.oldPrice && product.oldPrice > product.price) {
+            const discount = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
+            badgeHTML = `<span class="label sale-badge">-${discount}% OFF</span>`;
+        } else if (product.badge) {
+            badgeHTML = `<span class="label">${product.badge}</span>`;
         }
-    } else {
-        // User IS NOT logged in
-        guestView.style.display = "block";
-        userView.style.display = "none";
-    }
-}
-// ==========================================
-// 🔍 SEARCH LOGIC
-// ==========================================
-const searchInput = document.getElementById("search-input");
-const searchBtn = document.getElementById("search-btn");
 
-if (searchBtn && searchInput) {
-  searchBtn.addEventListener("click", function () {
-    const searchTerm = searchInput.value.toLowerCase();
-    const filteredProducts = products.filter((p) =>
-      p.name.toLowerCase().includes(searchTerm),
-    );
+        // 3. Stock Scarcity Bar
+        const stockPercent = product.stockPercent || Math.floor(Math.random() * 30) + 70; 
+        const isCategoryView = !!categoryGrid;
+        const stockBarHTML = (product.section === "arrivals" || isCategoryView) ? `
+            <div class="stock-container" style="margin: 10px 0;">
+                <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:bold; color:#ff4d4d;">
+                    <span>STOCKS LEFT</span><span>${100 - stockPercent}%</span>
+                </div>
+                <div style="width:100%; background:#eee; height:5px; border-radius:10px; margin-top:3px;">
+                    <div style="width:${stockPercent}%; background:#ff4d4d; height:100%; border-radius:10px;"></div>
+                </div>
+            </div>` : "";
 
-    const resultsGrid = document.getElementById("arrivals-grid");
-    const newArrivalsTitle = document.querySelector(".new-arrivals h2");
+        // 4. Wishlist Check
+        const wishlist = JSON.parse(localStorage.getItem("pp_wishlist")) || [];
+        const isWishlisted = wishlist.includes(product.id) ? "active" : "";
 
-    if (resultsGrid) {
-      resultsGrid.innerHTML = "";
-      if (newArrivalsTitle)
-        newArrivalsTitle.textContent = `Search Results for "${searchTerm}"`;
+        const productHTML = `
+            <div class="product-card" style="position:relative;">
+                <i class="fas fa-heart wishlist-heart ${isWishlisted}" data-id="${product.id}"></i>
+                ${badgeHTML}
+                <a href="product.html?id=${product.id}"><img src="${product.image}" alt="${product.name}"></a>
+                <h3>${product.name}</h3>
+                <div class="price-container">
+                    <span class="price" style="color:#007bff; font-weight:bold;">${priceDisplay}</span>
+                    ${product.oldPrice ? `<span class="old-price" style="text-decoration:line-through; color:#888; font-size:13px; margin-left:8px;">${oldPriceDisplay}</span>` : ''}
+                </div>
+                ${stockBarHTML}
+                <div class="card-actions" style="display: flex; gap: 8px; margin-top: auto;">
+                    <button class="add-to-cart" data-id="${product.id}" style="flex: 1;">Add to Cart</button>
+                    ${isCategoryView ? `<button class="buy-now-card-btn" data-id="${product.id}" style="flex: 1; background-color: #28a745; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;">Buy Now</button>` : ''}
+                </div>
+            </div>`;
 
-      if (filteredProducts.length > 0) {
-        filteredProducts.forEach((product) => {
-          const productHTML = `
-                        <div class="product-card">
-                            <a href="product.html?id=${product.id}">
-                                <img src="${product.image}" alt="${product.name}">
-                            </a>
-                            <h3>${product.name}</h3>
-                            <p class="price">$${product.price.toFixed(2)}</p>
-                            <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
-                        </div>
-                    `;
-          resultsGrid.innerHTML += productHTML;
-        });
-      } else {
-        resultsGrid.innerHTML =
-          '<p style="text-align: center; width: 100%;">No products found.</p>';
-      }
-      document
-        .getElementById("new-arrivals")
-        .scrollIntoView({ behavior: "smooth" });
-    }
-  });
-
-  searchInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      searchBtn.click();
-    }
-  });
+        if (categoryGrid) categoryGrid.innerHTML += productHTML;
+        else if (product.section === "arrivals" && arrivalsGrid) arrivalsGrid.innerHTML += productHTML;
+        else if (product.section === "popular" && popularGrid) popularGrid.innerHTML += productHTML;
+    });
 }
 
 // ==========================================
-// 🛒 ADD TO CART LOGIC
-// ==========================================
-document.addEventListener("click", function (event) {
-  if (event.target && event.target.classList.contains("add-to-cart")) {
-    const productID = parseInt(event.target.getAttribute("data-id"));
-    const productToAdd = products.find((p) => p.id === productID);
-
-    if (productToAdd) {
-      cart.push(productToAdd);
-      localStorage.setItem("purchasepalace_cart", JSON.stringify(cart));
-
-      // Visual Feedback
-      const originalText = event.target.textContent;
-      event.target.textContent = "Added! ✅";
-      event.target.style.backgroundColor = "#28a745";
-      event.target.style.color = "white";
-
-      setTimeout(() => {
-        event.target.textContent = originalText;
-        event.target.style.backgroundColor = "";
-        event.target.style.color = "";
-      }, 1000);
-
-
-      showToast("Item added to cart! 🛒");
-      updateCartBadge();
-    }
-  }
-});
-
-function updateCartBadge() {
-  const badge = document.getElementById("cart-badge");
-  if (badge) {
-    badge.textContent = cart.length;
-    badge.style.display = cart.length > 0 ? "block" : "none";
-  }
-}
-
-// ==========================================
-// 🎞️ HERO SLIDER LOGIC
+// 🎞️ HERO SLIDER & 🔍 SEARCH
 // ==========================================
 function startHeroSlider() {
     const slides = document.querySelectorAll(".slide");
     const dotsContainer = document.getElementById("slider-dots");
     let currentSlide = 0;
-    const slideInterval = 5000;
-
     if (slides.length === 0 || !dotsContainer) return;
 
-    // 1. Clear dots container first (prevents duplicates)
-    dotsContainer.innerHTML = ""; 
-
-    // 2. Create dots for EVERY slide found
-    slides.forEach((_, index) => {
+    dotsContainer.innerHTML = "";
+    slides.forEach((_, i) => {
         const dot = document.createElement("div");
-        dot.classList.add("dot");
-        if (index === 0) dot.classList.add("active");
-        
-        // Add click listener
-        dot.addEventListener("click", () => goToSlide(index));
+        dot.className = "dot";
+        if (i === 0) dot.classList.add("active");
+        dot.onclick = () => goToSlide(i);
         dotsContainer.appendChild(dot);
     });
 
-    // 2. Navigation function
+    let slideTimer = setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5000);
+
     function goToSlide(index) {
+        clearInterval(slideTimer);
         slides[currentSlide].classList.remove("active");
         document.querySelectorAll(".dot")[currentSlide].classList.remove("active");
-        
         currentSlide = index;
-        
         slides[currentSlide].classList.add("active");
         document.querySelectorAll(".dot")[currentSlide].classList.add("active");
+        slideTimer = setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5000);
+    }
+}
+
+function performSearch() {
+    const input = document.getElementById("search-input");
+    const query = input ? input.value.toLowerCase().trim() : "";
+    if (!query) return showToast("Please enter a search term! 🔍");
+    window.location.href = `product.html?search=${encodeURIComponent(query)}`;
+}
+
+// ==========================================
+// ⏳ FLASH SALE TIMER
+// ==========================================
+function initFlashSale() {
+    const targetDate = new Date("March 30, 2026 23:59:59").getTime();
+    const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        if (diff < 0) {
+            clearInterval(timer);
+            const el = document.getElementById("countdown");
+            if (el) el.innerHTML = "<h2 style='color:white;'>SALE ENDED</h2>";
+            return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (document.getElementById("days")) {
+            document.getElementById("days").innerText = d.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+        }
+    }, 1000);
+}
+
+// ==========================================
+// 👤 AUTH & HELPERS
+// ==========================================
+function checkAuthStatus() {
+    const guestView = document.getElementById("guest-view");
+    const userView = document.getElementById("user-view");
+    const currentUser = JSON.parse(localStorage.getItem("purchasepalace_user"));
+    if (!guestView || !userView) return;
+
+    if (currentUser) {
+        guestView.style.display = "none";
+        userView.style.display = "block";
+        userView.querySelector(".user-btn").textContent = `Hi, ${currentUser.name} ▾`;
+    } else {
+        guestView.style.display = "block";
+        userView.style.display = "none";
+    }
+}
+
+function updateCartBadge() {
+    const badge = document.getElementById("cart-badge");
+    if (badge) {
+        badge.textContent = cart.length;
+        badge.style.display = cart.length > 0 ? "block" : "none";
+    }
+}
+
+function toggleCurrency() {
+    currentCurrency = currentCurrency === "USD" ? "NGN" : "USD";
+    localStorage.setItem("pp_currency", currentCurrency);
+    const btn = document.getElementById("currency-toggle");
+    if (btn) btn.innerHTML = currentCurrency === "USD" ? "🇺🇸 USD" : "🇳🇬 NGN";
+    renderProducts(); 
+}
+
+// 📧 NEWSLETTER LOGIC 
+    const newsletterForm = document.querySelector(".newsletter-form");
+    if (newsletterForm) {
+        newsletterForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            showToast("Subscribed successfully! 📧");
+            newsletterForm.reset();
+        });
     }
 
-   // 3. Auto-play
-let slideTimer = setInterval(nextSlide, slideInterval);
+// ==========================================
+// 🚀 DOM CONTENT LOADED
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    renderProducts();
+    updateCartBadge();
+    startHeroSlider();
+    initFlashSale();
+    checkAuthStatus();
 
-function nextSlide() {
-    let nextIndex = (currentSlide + 1) % slides.length;
-    goToSlide(nextIndex);
-}
-
-// Update goToSlide to reset the timer
-function goToSlide(index) {
-    // Stop the current timer
-    clearInterval(slideTimer);
+    const yearSpan = document.getElementById("year");
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     
-    // Perform the switch
-    slides[currentSlide].classList.remove("active");
-    document.querySelectorAll(".dot")[currentSlide].classList.remove("active");
-    currentSlide = index;
-    slides[currentSlide].classList.add("active");
-    document.querySelectorAll(".dot")[currentSlide].classList.add("active");
-    
-    // Restart the timer so it doesn't jump immediately after a click
-    slideTimer = setInterval(nextSlide, slideInterval);
-}
-}
-// --- FIXED MOBILE MENU TOGGLE ---
-const hamburger = document.getElementById("hamburger-btn");
-const navLinks = document.getElementById("nav-links");
+    const mybutton = document.getElementById("myBtn");
+    if (mybutton) {
+        window.onscroll = () => mybutton.classList.toggle("show", window.pageYOffset > 300);
+        mybutton.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
-if (hamburger && navLinks) {
-    hamburger.addEventListener("click", () => {
-        // Toggle the 'active' class on the menu
-        const isOpen = navLinks.classList.toggle("active");
-        
-        // Find the icon inside the button
-        const icon = hamburger.querySelector("i");
+    const currBtn = document.getElementById("currency-toggle");
+    if (currBtn) currBtn.innerHTML = currentCurrency === "USD" ? "🇺🇸 USD" : "🇳🇬 NGN";
+});
 
-        // Set icon based on whether the menu is open or not
-        if (isOpen) {
-            icon.classList.replace("fa-bars", "fa-times");
-        } else {
-            icon.classList.replace("fa-times", "fa-bars");
-        }
-    });
-}
-
-// Keep this in main.js to handle the dynamically created logout button
+// ==========================================
+// 🖱️ GLOBAL CLICK DELEGATION
+// ==========================================
 document.addEventListener("click", (e) => {
-    if (e.target && e.target.id === "logout-btn") {
-        e.preventDefault();
+    // Wishlist Toggle
+    if (e.target.classList.contains("wishlist-heart")) {
+        const id = parseInt(e.target.dataset.id);
+        let wishlist = JSON.parse(localStorage.getItem("pp_wishlist")) || [];
+        if (wishlist.includes(id)) {
+            wishlist = wishlist.filter(i => i !== id);
+            e.target.classList.remove("active");
+            showToast("Removed from Wishlist 💔");
+            if (window.location.pathname.includes("wishlist.html")) location.reload();
+        } else {
+            wishlist.push(id);
+            e.target.classList.add("active");
+            showToast("Added to Wishlist! ❤️");
+        }
+        localStorage.setItem("pp_wishlist", JSON.stringify(wishlist));
+    }
+
+    // Add to Cart / Buy Now
+    if (e.target.classList.contains("add-to-cart") || e.target.classList.contains("buy-now-card-btn")) {
+        const id = parseInt(e.target.dataset.id);
+        const p = products.find(prod => prod.id === id);
+        if (p) {
+            cart.push(p);
+            localStorage.setItem("purchasepalace_cart", JSON.stringify(cart));
+            updateCartBadge();
+            if (e.target.classList.contains("buy-now-card-btn")) {
+                window.location.href = "checkout.html";
+            } else {
+                showToast("Item added to cart! 🛒");
+            }
+        }
+    }
+
+    // Auth & Search Buttons
+    if (e.target.id === "search-btn" || e.target.closest("#search-btn")) performSearch();
+    if (e.target.id === "logout-btn") {
         localStorage.removeItem("purchasepalace_user");
-        window.location.reload();
+        location.reload();
+    }
+    
+    // Hamburger Menu
+    if (e.target.closest("#hamburger-btn")) {
+        const nav = document.getElementById("nav-links");
+        const icon = document.querySelector("#hamburger-btn i");
+        const isOpen = nav.classList.toggle("active");
+        icon.classList.toggle("fa-bars", !isOpen);
+        icon.classList.toggle("fa-times", isOpen);
     }
 });
 
-
-
-
-
-const newsletterForm = document.querySelector('.newsletter-form');
-
-if (newsletterForm) {
-    newsletterForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Stop page reload
-        
-        const email = document.getElementById('email').value;
-        
-        if (email) {
-            showToast("Subscribed successfully! 📧");
-            newsletterForm.reset(); // Clear the input
-        }
+// Search Keypress
+const inputField = document.getElementById("search-input");
+if (inputField) {
+    inputField.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") performSearch();
     });
 }
