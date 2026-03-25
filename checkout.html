@@ -13,7 +13,6 @@
   const user = localStorage.getItem("purchasepalace_user");
   if (!user) {
     alert("Please sign in to complete your purchase!");
-    // We add the redirect parameter here
     window.location.href = "signin.html?redirect=checkout.html";
   }
 </script>
@@ -61,10 +60,11 @@
                     </div>
 
                     <h2><i class="fas fa-credit-card"></i> Payment</h2>
-                    <div class="form-group">
-                        <label>Card Number</label>
-                        <input type="text" placeholder="0000 0000 0000 0000" maxlength="12" minlength="12" required>
-                    </div>
+                   <div class="form-group" style="position: relative;">
+    <label for="card-number">Card Number</label>
+    <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19">
+    <i id="card-icon" class="fas fa-credit-card" style="position: absolute; right: 15px; top: 38px; color: #ccc; font-size: 20px;"></i>
+</div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>Expiry</label>
@@ -80,17 +80,26 @@
                 </form>
             </section>
 
-            <section class="checkout-summary">
-                <h2>Order Summary</h2>
-                <div id="order-items-list"></div>
-                
-                <hr>
-                
-                <div class="summary-row total">
-                    <span>Total to Pay:</span>
-                    <span id="checkout-total">$0.00</span>
-                </div>
-            </section>
+            <div class="checkout-summary">
+    <h2>Order Summary</h2>
+    <div class="summary-item">
+        <span>Subtotal</span>
+        <span id="checkout-subtotal">$0.00</span>
+    </div>
+    <div class="summary-item" style="color: #28a745; font-weight: bold;">
+        <span>Total Savings</span>
+        <span id="checkout-savings">-$0.00</span>
+    </div>
+    <div class="summary-item">
+        <span>Shipping</span>
+        <span>FREE</span>
+    </div>
+    <hr>
+    <div class="summary-item total">
+        <span>Total</span>
+        <span id="checkout-total">$0.00</span>
+    </div>
+</div>
         </div>
     </main>
 
@@ -160,6 +169,7 @@
         <button id="myBtn" title="Go to top">
     <i class="fas fa-arrow-up"></i>
 </button>
+    <script src="js/products.js"></script>
     <script src="js/main.js"></script>
     <script src="js/checkout.js"></script> </body>
 </html>
