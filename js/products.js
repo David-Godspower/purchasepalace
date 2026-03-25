@@ -7,8 +7,8 @@ const products = [
   {
     id: 1,
     name: "Dell Latitude 5580",
-    price: 109.99,
-    image: "img/laptop_product_feature.jpg", // Make sure this file exists!
+    price: 209.99,
+    image: "img/laptop_product_feature.jpg",
     category: "computing",
     badge: "New",
     section: "arrivals",
@@ -16,7 +16,7 @@ const products = [
   {
     id: 2,
     name: "Tecno Pop 10pro",
-    price: 86.52,
+    price: 186.52,
     image:
       "https://images.unsplash.com/photo-1597415581463-4b7a5a87be62?w=500&auto=format&fit=crop&q=60",
     category: "mobiles",
@@ -49,7 +49,7 @@ const products = [
     price: 50.21,
     image:
       "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=500&auto=format&fit=crop&q=60",
-    category: "baby-products",
+    category: "toys",
     badge: "New",
     section: "arrivals",
   },
@@ -86,7 +86,7 @@ const products = [
   {
     id: 9,
     name: "Bleu de Chanel perfume",
-    price: 125.49,
+    price: 15.49,
     image:
       "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500&auto=format&fit=crop&q=60",
     category: "beauty",
@@ -116,7 +116,7 @@ const products = [
   {
     id: 12,
     name: "Two-Seater Sofa",
-    price: 1789.99,
+    price: 189.99,
     image:
       "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&auto=format&fit=crop&q=60",
     category: "furniture",
@@ -138,7 +138,7 @@ const products = [
   {
     id: 14,
     name: "Office Chair",
-    price: 46.52,
+    price: 26.52,
     image:
       "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=500&auto=format&fit=crop&q=60",
     category: "furniture",
@@ -158,7 +158,7 @@ const products = [
   {
     id: 16,
     name: "Samsung Galaxy Tab S10 FE",
-    price: 200.99,
+    price: 400.99,
     image:
       "https://images.unsplash.com/photo-1623126908029-58cb08a2b272?w=500&auto=format&fit=crop&q=60",
     category: "mobiles",
@@ -168,7 +168,7 @@ const products = [
   {
     id: 17,
     name: "Smart Tv",
-    price: 50.21,
+    price: 1000.21,
     image:
       "https://images.unsplash.com/photo-1521607630287-ee2e81ad3ced?w=500&auto=format&fit=crop&q=60",
     category: "electronics",
@@ -178,7 +178,7 @@ const products = [
   {
     id: 18,
     name: "BMW M3",
-    price: 168500.0,
+    price: 1682500.0,
     image:
       "https://images.unsplash.com/photo-1584809394311-364392a5011b?w=500&auto=format&fit=crop&q=60",
     category: "automotive",
@@ -237,8 +237,9 @@ const products = [
   {
     id: 24,
     name: "Electric Fruit Juicer",
-    price: 45.99,
-    image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=500",
+    price: 22.99,
+    oldPrice: 45.99,
+    image: "https://images.unsplash.com/photo-1685131699993-682968079931?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8RWxlY3RyaWMlMjBGcnVpdCUyMEp1aWNlcnxlbnwwfDB8MHx8fDA%3D",
     category: "home-appliances",
     badge: "New",
     section: "arrivals",
@@ -251,5 +252,59 @@ const products = [
     category: "sports",
     badge: "Heavy Duty",
     section: "popular",
-  }
+  },
+  {
+    id: 26,
+    name: "Spanner Set",
+    price: 89.99,
+    image: "https://images.unsplash.com/photo-1611288870280-4a322b8ec7ec?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dG9vbHxlbnwwfHwwfHx8MA%3D%3D",
+    category: "diy",
+    badge: "New",
+    section: "popular",
+  },
+  {
+    id: 27,
+    name: "Fruits",
+    price: 9.99,
+    image: "https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z3JvY2VyeXxlbnwwfDB8MHx8fDA%3D",
+    category: "groceries",
+    badge: "Trending",
+    section: "popular",
+  },
+  {
+    id: 28,
+    name: "Camera",
+    price: 89.99,
+    image: "https://images.unsplash.com/photo-1698199071311-bd5fe0e37449?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fG1lZGlhfGVufDB8MHwwfHx8MA%3D%3D",
+    category: "media",
+    badge: "Top Rated",
+  },
+  {
+    id: 29,
+    name: "Office Desk",
+    price: 89.99,
+    oldPrice: 129.99,
+    image: "https://plus.unsplash.com/premium_photo-1670315264879-59cc6b15db5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8b2ZmaWNlfGVufDB8MHwwfHx8MA%3D%3D",
+    category: "office-equipment",
+    section: "popular",
+  },
+  {
+    id: 30,
+    name: "Spanner",
+    price: 4.99,
+    oldPrice: 9.99,
+    image: "https://media.istockphoto.com/id/168362728/photo/tools.webp?a=1&b=1&s=612x612&w=0&k=20&c=SmB2Vjj0u6orM3pKlwnz3OMdO_EFlU7ANfuRY_4a-uc=",
+    category: "tools",
+    badge: "Sale",
+  },
+  {
+    id: 31,
+    name: "Baby Product",
+    price: 5.35,
+    image: "https://plus.unsplash.com/premium_photo-1723914068725-fa8dd1b868cd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmFieSUyMGNhcmUlMjBwcm9kdWN0c3xlbnwwfDB8MHx8fDA%3D",
+    category: "baby-products",
+    badge: "top rated",
+  },
+
+  
 ];
