@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PurchasePalace | My Wishlist ❤️</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <main class="shop-by-category">
+        <div class="arrivals">
+            <h2><i class="fas fa-heart"></i> My Wishlist</h2>
+            <a href="index.html" class="view-all-btn">Continue Shopping <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div id="wishlist-grid" class="product-grid">
+            </div>
+
+        <div id="empty-wishlist" style="display: none; text-align: center; padding: 100px 20px;">
+            <i class="fas fa-heart-broken" style="font-size: 80px; color: #ccc; margin-bottom: 20px;"></i>
+            <h2>Your wishlist is lonely!</h2>
+            <p>Add items you love so you can find them later.</p>
+            <br>
+            <a href="index.html" class="cta-btn">Explore Products</a>
+        </div>
+    </main>
+
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wishlist-manager.js"></script>
+</body>
+</html>
