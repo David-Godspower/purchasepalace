@@ -1,43 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);
-    // Convert to lowercase to ensure it matches your database keys
-    const categoryQuery = params.get('category')?.toLowerCase();
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryFilter = urlParams.get("category");
+  const searchQuery = urlParams.get("search"); // Add this line
+  const productGrid = document.getElementById("product-grid");
 
-    const grid = document.getElementById('category-grid');
-    const title = document.getElementById('category-title');
+  if (!productGrid || (!categoryFilter && !searchQuery)) return;
 
-    // 1. Filter logic with case-insensitive check
-    let filteredProducts = products; 
-    
-    if (categoryQuery) {
-        filteredProducts = products.filter(p => p.category.toLowerCase() === categoryQuery);
-        // Formats "baby-products" to "BABY PRODUCTS"
-        title.textContent = categoryQuery.replace('-', ' ').toUpperCase();
-    }
+  let filteredProducts = [];
 
-    // 2. Render logic
-    if (filteredProducts.length > 0) {
-        grid.innerHTML = filteredProducts.map(product => `
-            <div class="product-card">
-                <a href="product.html?id=${product.id}">
-                    <img src="${product.image}" alt="${product.name}">
-                </a>
-                <div class="product-info">
-                    <h3>${product.name}</h3>
-                    <span class="label" style="background: ${product.badge === 'Hot' ? '#ff4d4d' : '#007bff'}">
-                        ${product.badge}
-                    </span>
-                    <p class="price">$${product.price.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
-                    <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
-                </div>
-            </div>
-        `).join('');
-    } else {
-        grid.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 60px;">
-                <h2>No items found in "${categoryQuery}"</h2>
-                <p>We're currently restocking this section. Check back soon!</p>
-                <a href="index.html" class="cta-btn" style="display:inline-block; margin-top:20px;">Back to Home</a>
-            </div>`;
-    }
+  // Logic for Category
+  if (categoryFilter) {
+    filteredProducts = products.filter((p) => p.category === categoryFilter);
+    const title = document.getElementById("category-title");
+    if (title) title.textContent = categoryFilter.toUpperCase();
+  } 
+  // Logic for Search
+  else if (searchQuery) {
+    const term = searchQuery.toLowerCase();
+    filteredProducts = products.filter((p) => 
+        p.name.toLowerCase().includes(term) || 
+        p.category.toLowerCase().includes(term)
+    );
+    const title = document.getElementById("category-title");
+    if (title) title.textContent = `SEARCH RESULTS FOR: "${searchQuery.toUpperCase()}"`;
+  }
+
+  // CHECK: Render items or show empty state
+  if (filteredProducts.length > 0) {
+    renderProducts(filteredProducts);
+  } else {
+    productGrid.innerHTML = `
+        <div class="empty-state" style="text-align: center; width: 100%; padding: 50px;">
+            <i class="fas fa-search-minus" style="font-size: 50px; color: #ccc; margin-bottom: 20px;"></i>
+            <h2>No results found for "${searchQuery || categoryFilter}"</h2>
+            <p>Try a different keyword or check your spelling.</p>
+            <a href="index.html" class="cta-btn" style="margin-top: 20px; display: inline-block;">Back to Shopping</a>
+        </div>
+    `;
+  }
 });
